@@ -1,0 +1,551 @@
+/* =========================================
+   VARIABLES
+========================================= */
+
+:root {
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --background: #f1f5f9;
+    --card: #ffffff;
+
+    --text: #0f172a;
+    --muted: #64748b;
+
+    --border: #e2e8f0;
+
+    --danger: #dc2626;
+    --success: #16a34a;
+
+    --radius: 12px;
+
+    --shadow:
+        0 10px 30px rgba(15, 23, 42, 0.1);
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        var(--background);
+
+    color:
+        var(--text);
+
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+.sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+}
+
+
+button,
+input {
+    font: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 1rem;
+}
+
+
+.todo-container {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    background:
+        var(--card);
+
+    padding:
+        2rem;
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.app-header {
+
+    text-align: center;
+
+    margin-bottom: 2rem;
+}
+
+
+.label {
+
+    color:
+        var(--primary);
+
+    font-size: 0.75rem;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 0.5rem;
+}
+
+
+.app-header h1 {
+
+    font-size:
+        clamp(2rem, 8vw, 3rem);
+
+    margin-bottom: 0.5rem;
+}
+
+
+.app-header p:last-child {
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.todo-form {
+
+    display: flex;
+
+    gap: 0.75rem;
+
+    margin-bottom: 1.5rem;
+}
+
+
+.todo-form input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding:
+        0.85rem 1rem;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    outline: none;
+
+    color:
+        var(--text);
+
+    background:
+        var(--card);
+}
+
+
+.todo-form input:focus {
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.15);
+}
+
+
+.add-btn {
+
+    padding:
+        0.85rem 1.2rem;
+
+    border: 0;
+
+    border-radius:
+        var(--radius);
+
+    background:
+        var(--primary);
+
+    color: white;
+
+    font-weight: bold;
+
+    transition:
+        0.2s ease;
+}
+
+
+.add-btn:hover {
+    background:
+        var(--primary-dark);
+}
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+.task-stats {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    gap: 1rem;
+
+    padding:
+        1rem;
+
+    margin-bottom:
+        1.25rem;
+
+    background:
+        #f8fafc;
+
+    border-radius:
+        var(--radius);
+
+    color:
+        var(--muted);
+
+    font-size:
+        0.9rem;
+}
+
+
+.task-stats strong {
+
+    color:
+        var(--text);
+}
+
+
+/* =========================================
+   FILTERS
+========================================= */
+
+.filters {
+
+    display: flex;
+
+    gap: 0.5rem;
+
+    margin-bottom:
+        1.5rem;
+}
+
+
+.filter-btn {
+
+    padding:
+        0.6rem 1rem;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        999px;
+
+    background:
+        var(--card);
+
+    color:
+        var(--muted);
+
+    transition:
+        0.2s ease;
+}
+
+
+.filter-btn:hover,
+.filter-btn.active {
+
+    background:
+        var(--primary);
+
+    border-color:
+        var(--primary);
+
+    color:
+        white;
+}
+
+
+/* =========================================
+   TASK LIST
+========================================= */
+
+.todo-list {
+
+    list-style: none;
+
+    display: grid;
+
+    gap: 0.75rem;
+}
+
+
+.todo-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.75rem;
+
+    padding:
+        0.9rem;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    background:
+        var(--card);
+}
+
+
+.todo-item.completed .task-text {
+
+    text-decoration:
+        line-through;
+
+    color:
+        var(--muted);
+}
+
+
+.task-checkbox {
+
+    width: 18px;
+    height: 18px;
+
+    accent-color:
+        var(--primary);
+
+    flex-shrink: 0;
+}
+
+
+.task-text {
+
+    flex: 1;
+
+    word-break:
+        break-word;
+}
+
+
+.task-edit {
+
+    flex: 1;
+
+    padding:
+        0.5rem;
+
+    border:
+        1px solid var(--primary);
+
+    border-radius:
+        6px;
+}
+
+
+.action-btn {
+
+    border: 0;
+
+    background:
+        transparent;
+
+    padding:
+        0.4rem;
+
+    font-weight:
+        bold;
+}
+
+
+.edit-btn {
+    color:
+        var(--primary);
+}
+
+
+.delete-btn {
+    color:
+        var(--danger);
+}
+
+
+.action-btn:hover {
+    opacity: 0.7;
+}
+
+
+/* =========================================
+   EMPTY MESSAGE
+========================================= */
+
+.empty-message {
+
+    text-align:
+        center;
+
+    padding:
+        2rem 1rem;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================
+   CLEAR BUTTON
+========================================= */
+
+.clear-btn {
+
+    display: block;
+
+    margin:
+        1.5rem auto 0;
+
+    border: 0;
+
+    background:
+        transparent;
+
+    color:
+        var(--danger);
+
+    font-weight:
+        bold;
+}
+
+
+.clear-btn:hover {
+    text-decoration:
+        underline;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 500px) {
+
+    .todo-container {
+        padding: 1.25rem;
+    }
+
+
+    .todo-form {
+
+        flex-direction:
+            column;
+    }
+
+
+    .add-btn {
+        width: 100%;
+    }
+
+
+    .task-stats {
+
+        flex-direction:
+            column;
+
+        text-align:
+            center;
+    }
+
+
+    .filters {
+
+        justify-content:
+            center;
+
+        flex-wrap:
+            wrap;
+    }
+
+
+    .todo-item {
+
+        flex-wrap:
+            wrap;
+    }
+
+}
